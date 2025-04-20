@@ -26,6 +26,8 @@
       width: 100%;
       height: auto;
       transition: opacity 1s ease-in-out;
+      touch-action: manipulation;
+      cursor: pointer;
     }
 
     .invitation-card {
@@ -65,16 +67,6 @@
       font-size: 18px;
     }
 
-    a {
-      text-decoration: none;
-      color: #b22222;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
     .divider {
       height: 2px;
       background: linear-gradient(to right, #b8860b, #ffffff, #b8860b);
@@ -84,6 +76,21 @@
     .ganesha {
       width: 80px;
       margin-bottom: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #b22222;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8b0000;
     }
   </style>
 </head>
@@ -95,7 +102,7 @@
 
   <!-- Wedding Card Below -->
   <div class="invitation-card">
-    <img src="images\—Pngtree—colorful clipart of lord ganesha_16777447.png" alt="Lord Ganesha" class="ganesha">
+    <img src="images/—Pngtree—colorful clipart of lord ganesha_16777447.png" alt="Lord Ganesha" class="ganesha">
     <h1>Wedding Invitation</h1>
     <div class="divider"></div>
     <p class="names">Hyndavi & Naveen</p>
@@ -106,7 +113,11 @@
       <p><strong>Date:</strong> Friday, 09th May 2025</p>
       <p><strong>Time:</strong> 7:00 PM onwards</p>
       <p><strong>Venue:</strong><br>K Conventions,<br>Near Old Goshala Y Junction,<br>Old Adavivaram, Sri Sai Nagar, Simhachalam,<br>Visakhapatnam, Andhra Pradesh - 530028</p>
-      <p><a href="https://www.google.com/maps/place/K+Conventions/@17.77083,83.237551,17z/data=!3m1!4b1!4m6!3m5!1s0x3a3967922932d6fb:0x1e51cd9df26c8ed8!8m2!3d17.77083!4d83.237551!16s%2Fg%2F11gcyw26g7?entry=ttu" target="_blank">📍 View on Google Maps</a></p>
+
+      <!-- Map Button -->
+      <button onclick="window.open('https://www.google.com/maps/place/K+Conventions/@17.77083,83.237551,17z/data=!3m1!4b1!4m6!3m5!1s0x3a3967922932d6fb:0x1e51cd9df26c8ed8!8m2!3d17.77083!4d83.237551!16s%2Fg%2F11gcyw26g7?entry=ttu', '_blank')">
+        📍 Open Location in Google Maps
+      </button>
     </div>
     <div class="divider"></div>
     <div class="footer">
@@ -125,23 +136,27 @@
       'images/02 (96).JPG',
       'images/02 (118).JPG',
       'images/02 (278).JPG'
-      // Add more image paths as needed
     ];
 
-    // Shuffle images randomly
     const shuffled = images.sort(() => 0.5 - Math.random());
-
     let index = 0;
     const slideshow = document.getElementById('slideshow');
 
-    setInterval(() => {
+    function showNextImage() {
       index = (index + 1) % shuffled.length;
       slideshow.style.opacity = 0;
       setTimeout(() => {
         slideshow.src = shuffled[index];
         slideshow.style.opacity = 1;
       }, 500);
-    }, 3000); // Change every 3 seconds
+    }
+
+    // Auto slideshow
+    setInterval(showNextImage, 3000);
+
+    // Touch and click to change image
+    slideshow.addEventListener('touchstart', showNextImage);
+    slideshow.addEventListener('click', showNextImage);
   </script>
 </body>
 </html>
